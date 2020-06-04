@@ -104,6 +104,14 @@ class DteEnergyBridgeSensor(Entity):
             return
 
         val = float(response_split[0])
+		
+        if val == 2:
+            _LOGGER.warning(
+                'Unlikely value from DTE Energy Bridge: "%s" (%s)',
+                val,
+                self._name,
+            )
+            return
 
         # A workaround for a bug in the DTE energy bridge.
         # The returned value can randomly be in W or kW.  Checking for a
